@@ -22,11 +22,26 @@
 # THE SOFTWARE.
 #
 
-from .siglent_sds1000xhd import SDS1000XHD
-from .siglent_sds1072cml import SDS1072CML
-from .siglent_spd1168x import SPD1168X
-from .siglent_spd1305x import SPD1305X
-from .siglent_sdg1000 import SDG1000
-from .siglent_sdg1000x import SDG1000X
-from .siglent_sdg1000xplus import SDG1000XPlus
-from .siglent_sdg2000x import SDG2000X
+from .siglent_sdg_base import SDGBase
+
+
+class SDG2000X(SDGBase):
+    """Driver for the Siglent SDG2000X series function/arbitrary waveform generator.
+
+    Two channels, 16-bit DAC, 1.2 GSa/s sampling, 8 Mpts of arbitrary
+    waveform memory per channel. The series covers:
+
+    * SDG2042X (40 MHz sine)
+    * SDG2082X (80 MHz sine)
+    * SDG2122X (120 MHz sine)
+
+    The class caps the ``frequency`` validator at the highest SKU
+    (120 MHz).
+    """
+
+    _max_frequency_sine = 120e6
+    _arb_resolution_bits = 16
+    _max_arb_points = 8_000_000
+
+    def __init__(self, adapter, name="Siglent SDG2000X", **kwargs):
+        super().__init__(adapter, name, **kwargs)

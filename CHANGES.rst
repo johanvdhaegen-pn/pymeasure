@@ -173,6 +173,10 @@ New Contributors
 **Full Changelog**: https://github.com/pymeasure/pymeasure/compare/v0.15.0...v0.16.0
 
 
+Instruments
+-----------
+- Add Siglent SDG1000, SDG1000X, SDG1000X Plus, and SDG2000X function/arbitrary waveform generators
+
 Version 0.15.0 (2025-01-15)
 ===========================
 Main items of this new release:

@@ -22,11 +22,27 @@
 # THE SOFTWARE.
 #
 
-from .siglent_sds1000xhd import SDS1000XHD
-from .siglent_sds1072cml import SDS1072CML
-from .siglent_spd1168x import SPD1168X
-from .siglent_spd1305x import SPD1305X
-from .siglent_sdg1000 import SDG1000
-from .siglent_sdg1000x import SDG1000X
-from .siglent_sdg1000xplus import SDG1000XPlus
-from .siglent_sdg2000x import SDG2000X
+from .siglent_sdg_base import SDGBase
+
+
+class SDG1000XPlus(SDGBase):
+    """Driver for the Siglent SDG1000X Plus series function/arbitrary waveform generator.
+
+    Two channels, 16-bit DAC, 1 GSa/s sampling, 8 Mpts of arbitrary waveform
+    memory per channel. The series covers:
+
+    * SDG1022X Plus (25 MHz sine)
+    * SDG1032X Plus (30 MHz sine)
+    * SDG1062X Plus (60 MHz sine)
+
+    PRBS, multi-pulse, sequence playback and the built-in web server are
+    supported by the instrument but not yet exposed by this driver — the
+    MVP focuses on basic-waveform / arbitrary-waveform output.
+    """
+
+    _max_frequency_sine = 60e6
+    _arb_resolution_bits = 16
+    _max_arb_points = 8_000_000
+
+    def __init__(self, adapter, name="Siglent SDG1000X Plus", **kwargs):
+        super().__init__(adapter, name, **kwargs)
